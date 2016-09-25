@@ -6,9 +6,6 @@
  * Time: 13:15
  */
 
-namespace YPRedirector;
-
-
 use YPReconciliation\SetsReconciliation;
 
 class SetsReconciliationTest extends \PHPUnit_Framework_TestCase {
