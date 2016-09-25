@@ -20,19 +20,24 @@ class SetsReconciliation
     /**
      * @var Closure
      */
-    private $uniqIdClosure;
+    private $uniqueMaskGetterClosure;
 
     public function __construct($comparisonProperty = 'id', $itemArray = false)
     {
         $this->comparisonProperty = $comparisonProperty;
         $this->itemArray = $itemArray;
-        $this->uniqIdClosure = function($item) use ($comparisonProperty, $itemArray) {
+        $this->setUniqueMaskGetterClosure(function($item) use ($comparisonProperty, $itemArray) {
             if ($itemArray) {
                 return $item[$comparisonProperty];
             } else {
                 return $item->{$comparisonProperty};
             }
-        };
+        });
+    }
+
+    public function setUniqueMaskGetterClosure(Closure $closure)
+    {
+        $this->uniqueMaskGetterClosure = $closure;
     }
 
     /**
@@ -51,15 +56,15 @@ class SetsReconciliation
         $toRemove = array();
         $toAdd = array();
 
-        $uniqIdClosure = $this->uniqIdClosure;
+        $uniqueMaskGetterClosure = $this->uniqueMaskGetterClosure;
 
         $masterIds = array();
         foreach ($masterSet as $key => $masterItem) {
-            $masterIds[$key] = $uniqIdClosure($masterItem);
+            $masterIds[$key] = $uniqueMaskGetterClosure($masterItem);
         }
         $slaveIds = array();
         foreach ($slaveSet as $key => $slaveItem) {
-            $slaveIds[$key] = $uniqIdClosure($slaveItem);
+            $slaveIds[$key] = $uniqueMaskGetterClosure($slaveItem);
         }
 
         foreach ($masterIds as $key => $masterId) {
