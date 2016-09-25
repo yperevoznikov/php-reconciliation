@@ -42,5 +42,19 @@ class SetsReconciliationTest extends \PHPUnit_Framework_TestCase {
 		);
 		$this->assertCount(2, $result->getUpdateList());
 	}
+
+	public function testSetUniqueMaskGetterClosure()
+	{
+		$reconciliation = new SetsReconciliation();
+		$reconciliation->setUniqueMaskGetterClosure(function($item) {
+			return $item['name'];
+		});
+		$result = $reconciliation->getReconciliationActions(
+			array(array('name' => 1), array('name' => 2)),
+			array(array('name' => 3))
+		);
+		$this->assertCount(2, $result->getAddList());
+		$this->assertCount(1, $result->getRemoveList());
+	}
 	
 }

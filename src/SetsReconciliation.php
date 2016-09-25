@@ -22,9 +22,14 @@ class SetsReconciliation
      */
     private $uniqueMaskGetterClosure;
 
-    public function __construct($comparisonProperty = 'id', $itemArray = false)
+    public function __construct($comparisonProperty = null, $itemArray = false)
     {
-        $this->comparisonProperty = $comparisonProperty;
+        if (is_string($comparisonProperty)) {
+            $this->comparisonProperty = $comparisonProperty;
+        } else {
+            $this->comparisonProperty = 'id';
+        }
+
         $this->itemArray = $itemArray;
         $this->setUniqueMaskGetterClosure(function($item) use ($comparisonProperty, $itemArray) {
             if ($itemArray) {
