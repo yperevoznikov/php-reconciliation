@@ -12,15 +12,15 @@ class SetsReconciliationTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetReconciliationActions(){
 		$reconciliation = new SetsReconciliation('id', true);
-		$result = $reconciliation->getReconciliationActions([], []);
+		$result = $reconciliation->getReconciliationActions(array(), array());
 		$this->assertInstanceOf('YPReconciliation\ReconciliationActions', $result);
 	}
 
 	public function testGetReconciliationActionsForRemoveList(){
 		$reconciliation = new SetsReconciliation('id', true);
 		$result = $reconciliation->getReconciliationActions(
-			[['id' => 3]],
-			[['id' => 1], ['id' => 2]]
+			array(array('id' => 3)),
+			array(array('id' => 1), array('id' => 2))
 		);
 		$this->assertCount(2, $result->getRemoveList());
 	}
@@ -28,8 +28,8 @@ class SetsReconciliationTest extends \PHPUnit_Framework_TestCase {
 	public function testGetReconciliationActionsForAddList(){
 		$reconciliation = new SetsReconciliation('id', true);
 		$result = $reconciliation->getReconciliationActions(
-			[['id' => 1], ['id' => 2]],
-			[['id' => 3]]
+			array(array('id' => 1), array('id' => 2)),
+			array(array('id' => 3))
 		);
 		$this->assertCount(2, $result->getAddList());
 	}
@@ -37,8 +37,8 @@ class SetsReconciliationTest extends \PHPUnit_Framework_TestCase {
 	public function testGetReconciliationActionsForUpdateList(){
 		$reconciliation = new SetsReconciliation('id', true);
 		$result = $reconciliation->getReconciliationActions(
-			['a' => ['id' => 1], 'b' => ['id' => 2]],
-			[['id' => 1], ['id' => 2]]
+			array('a' => array('id' => 1), 'b' => array('id' => 2)),
+			array(array('id' => 1), array('id' => 2))
 		);
 		$this->assertCount(2, $result->getUpdateList());
 	}
