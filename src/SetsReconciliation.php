@@ -64,29 +64,33 @@ class SetsReconciliation
         $uniqueMaskGetterClosure = $this->uniqueMaskGetterClosure;
 
         $masterIds = array();
+        $masterItems = array();
         foreach ($masterSet as $key => $masterItem) {
             $masterIds[$key] = $uniqueMaskGetterClosure($masterItem);
+            $masterItems[$key] = $masterItem;
         }
         $slaveIds = array();
+        $slaveKeys = array();
         foreach ($slaveSet as $key => $slaveItem) {
             $slaveIds[$key] = $uniqueMaskGetterClosure($slaveItem);
+            $slaveKeys[$key] = $slaveItem;
         }
 
         foreach ($masterIds as $key => $masterId) {
             if (!in_array($masterId, $slaveIds)) {
-                $toAdd[] = $masterSet[$key];
+                $toAdd[] = $masterItems[$key];
             }
         }
 
         foreach ($slaveIds as $key => $slaveId) {
             if (!in_array($slaveId, $masterIds)) {
-                $toRemove[] = $slaveSet[$key];
+                $toRemove[] = $slaveKeys[$key];
             }
         }
 
         $commonItems = array_intersect($masterIds, $slaveIds);
         foreach ($commonItems as $key => $commonId) {
-            $toUpdate[] = $masterIds[$key];
+            $toUpdate[] = $masterItems[$key];
         }
 
         return new ReconciliationActions($toUpdate, $toRemove, $toAdd);
