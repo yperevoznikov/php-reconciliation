@@ -1,7 +1,7 @@
 {
     "name": "yperevoznikov/reconciliation",
     "description": "Reconciliation algorithm on PHP for everyday usage",
-    "type": "Helper classes",
+    "type": "library",
     "authors": [
         {
             "name": "Yuriy Perevoznikov",
