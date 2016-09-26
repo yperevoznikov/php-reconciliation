@@ -4,10 +4,13 @@
 
 Reconciliation algorithm on PHP language for everyday usage.   
 Data synchronization (set Reconciliation problem) is the process of establishing consistency among data from a source to a target data storage and vice versa and the continuous harmonization of the data over time.  
-[Data synchronization (Wikiperia)](https://en.wikipedia.org/wiki/Data_synchronization)
+:q[Data synchronization (Wikiperia)](https://en.wikipedia.org/wiki/Data_synchronization)
 
 ## Usage example
 ```
+// Use Package
+use YPReconciliation\SetsReconciliation;
+
 // Create Reconciliation Algo Class
 $reconciliation = new SetsReconciliation();
 
