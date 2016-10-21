@@ -1,12 +1,18 @@
 <?php
 /**
  * Created on 25/09/16 01:06
- * @author Yuriy Perevoznikov
+ * @author Yuriy Perevoznikov <yuriless@gmail.com>
  */
 
 namespace YPReconciliation;
 
-
+/**
+ * Class ReconciliationActions
+ * Contains actions to perform in order to make second set ($slaveSet in SetsReconciliation::getReconciliationActions())
+ * be the same as first one ($masterSet)
+ *
+ * @package YPReconciliation
+ */
 class ReconciliationActions
 {
 
@@ -25,6 +31,11 @@ class ReconciliationActions
      */
     private $addList = array();
 
+    /**
+     * @param array $updateList
+     * @param array $removeList
+     * @param array $addList
+     */
     public function __construct(array $updateList, array $removeList, array $addList)
     {
         $this->updateList = $updateList;

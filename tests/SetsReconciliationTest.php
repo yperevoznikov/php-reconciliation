@@ -1,9 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: yuriy
- * Date: 01/09/15
- * Time: 13:15
+ * Created on 25/09/16 01:06
+ * @author Yuriy Perevoznikov <yuriless@gmail.com>
  */
 
 use YPReconciliation\SetsReconciliation;

@@ -1,9 +1,17 @@
 <?php
+/**
+ * Created on 25/09/16 01:06
+ * @author Yuriy Perevoznikov <yuriless@gmail.com>
+ */
 
 namespace YPReconciliation;
 
 use Closure;
 
+/**
+ * Class SetsReconciliation
+ * @package YPReconciliation
+ */
 class SetsReconciliation
 {
 
@@ -22,6 +30,10 @@ class SetsReconciliation
      */
     private $uniqueMaskGetterClosure;
 
+    /**
+     * @param null|string $comparisonProperty
+     * @param bool $itemArray
+     */
     public function __construct($comparisonProperty = null, $itemArray = false)
     {
         if (is_string($comparisonProperty)) {
@@ -55,7 +67,14 @@ class SetsReconciliation
         return $this->algorithm1($masterSet, $slaveSet);
     }
 
-    public function algorithm1(array $masterSet, array $slaveSet)
+    /**
+     * Naive implementation of reconciliation algorithm
+     *
+     * @param array $masterSet
+     * @param array $slaveSet
+     * @return ReconciliationActions
+     */
+    protected function algorithm1(array $masterSet, array $slaveSet)
     {
         $toUpdate = array();
         $toRemove = array();
